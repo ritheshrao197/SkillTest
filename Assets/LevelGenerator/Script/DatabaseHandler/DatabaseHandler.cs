@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿/*using System.Collections.Generic;
 using Proyecto26;
 namespace RogueTest
 {
@@ -56,4 +56,4 @@ namespace RogueTest
             });
         }
     }
-}
+}*/
