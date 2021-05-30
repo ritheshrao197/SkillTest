@@ -59,7 +59,9 @@ namespace RogueTest
                 options.Add(option);
             }
             levelNumber.AddOptions(options);
-            levelNumber.value = gameData.leveldata[0].levelNumber;
+            levelNumber.value = gameData.leveldata[0].levelNumber-1;
+            ShowLeveldata(levelNumber.value);
+
 
         }
 
@@ -96,9 +98,12 @@ namespace RogueTest
             //level.rows = int.Parse(rows.text);
 
             cells.Clear();
-            ClearParent(gridParent.transform);
+           
+           ClearParent(gridParent.transform);
             gridParent.GetComponent<GridLayoutGroup>().cellSize = new Vector2(gridParent.GetComponent<RectTransform>().rect.width / float.Parse(rows.text),
                 gridParent.GetComponent<RectTransform>().rect.height / float.Parse(columns.text));
+            level.rows = int.Parse(rows.text);
+            level.columns =int.Parse( rows.text);
             for (int i = 0; i < level.rows; i++)
             {
                 for (int j = 0; j < level.columns; j++)
@@ -112,6 +117,7 @@ namespace RogueTest
 
         private void updategamedata()
         {
+            
             gameData.levels = int.Parse(TotalNumberOfLevels.text);
             gameData.levelStartDelay = float.Parse(LevelStartDelay.text);
             gameData.playerFoodPoints = int.Parse(playerFoodPoints.text);
@@ -119,6 +125,8 @@ namespace RogueTest
             gameData.playerData.pointsPerFood = int.Parse(pointsPerFood.text);
             gameData.playerData.pointsPerSoda = int.Parse(pointsPerSoda.text);
             gameData.playerData.wallDamage = int.Parse(wallDamage.text);
+            gameData.leveldata[level.levelNumber - 1] = level;
+
         }
         public void SaveLevelData()
         {
@@ -159,7 +167,6 @@ namespace RogueTest
         }
         public void OnLevelDataChanged()
         {
-            Debug.Log("LevelNumber " + levelNumber.value);
             if (level.levelNumber != levelNumber.value + 1)
                 ShowLeveldata(levelNumber.value);
         }
